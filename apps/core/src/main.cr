@@ -8,4 +8,8 @@ get "/" do
   render_view "home/index"
 end
 
+get "/verification" do
+  render_view "verification/index"
+end
+
 Kemal.run

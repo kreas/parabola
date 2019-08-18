@@ -5,6 +5,7 @@ services:
     image: nginx:1.17.2
     volumes:
       - ./configs/nginx.dev.conf:/etc/nginx/nginx.conf
+      - ./apps/verification/dist/index.js:/var/www/parabola/js/verification.js
     depends_on:
       - core
     ports:
@@ -18,5 +19,10 @@ services:
     working_dir: /app
     volumes:
       - ./apps/core:/app
-    ports:
-      - 3000:3000
+
+  verification:
+    image: node:12.8.1
+    hostname: verification
+    working_dir: /app
+    volumes:
+      - ./apps/verification:/app
