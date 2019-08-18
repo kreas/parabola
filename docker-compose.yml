@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  server:
+    image: nginx:1.17.2
+    volumes:
+      - ./configs/nginx.dev.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - core
+    ports:
+      - 8080:80
+      - 443:443
+
+  core:
+    image: crystallang/crystal
+    command: crystal src/main.cr
+    hostname: core
+    working_dir: /app
+    volumes:
+      - ./apps/core:/app
+    ports:
+      - 3000:3000
